@@ -61,13 +61,13 @@ It features animated banners, a dynamic About section, clickable project links, 
 
 ## Features
 
-- **Catppuccin Mocha Theme**: All UI and markdown rendering use the Catppuccin Mocha palette for a cohesive, modern look.
-- **Animated ASCII Banners**: Custom, non-distracting banner animations and glitch effects.
+- **Catppuccin Mocha Theme**: I love it :)
+- **Animated ASCII Banners**: Custom banner animations and glitch effects.
 - **Centered Responsive Layout**: UI is always centered, adapting to any terminal size.
 - **Dynamic About Section**: Rotating fun facts, skills, and passions.
 - **Project Showcase**: Clickable project links with markdown descriptions.
 - **Resume Viewer**: Scrollable, zoomable, and beautifully rendered markdown resume.
-- **Badges & Webrings**: Show off your achievements and affiliations.
+- **Badges & Webrings**: Show off your achievements and affiliations/webrings.
 - **Keyboard Navigation**: Navigate sections with numeric keys.
 - **Modern Stack**: Built with Bubble Tea, Lipgloss, and Glamour.
 
@@ -98,7 +98,7 @@ go run .
 
 ## Usage
 
-- `1` — About Me (dynamic fun facts, skills, passions)
+- `1` — About Me (dynamic facts, skills, passions)
 - `2` — My Works (clickable project links)
 - `3` — Resume (scrollable, zoomable, markdown)
 - `4` — Webrings & Badges
@@ -117,8 +117,8 @@ You can adapt the theme by editing `assets/glamour-catppuccin.json` and the colo
 
 ## Customization
 
-- **Resume**: Place your markdown resume in `content/resume.md`.
-- **Projects**: Edit `assets/paste.txt` for your project list.
+- **Resume**: Place your markdown resume in `internal/data/content/resume.md`.
+- **Projects**: Edit `internal/data/assets/paste.txt` for your project list.
 - **Badges & Webrings**: Update `views/badges.go` as needed.
 - **Banner and vector art**: Customize in `model.go`.
 
