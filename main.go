@@ -1,9 +1,9 @@
 package main
 
 import (
-	"os"
 	tea "github.com/charmbracelet/bubbletea"
 	"porterm/model"
+	"os"
 )
 
 func main() {
@@ -13,4 +13,3 @@ func main() {
 		os.Exit(1)
 	}
 }
-
