@@ -1,0 +1,71 @@
+{
+  "document": {
+    "color": "#cdd6f4",
+    "background": "#1e1e2e"
+  },
+  "h1": {
+    "color": "#cba6f7",
+    "bold": true,
+    "marginTop": 1,
+    "marginBottom": 1
+  },
+  "h2": {
+    "color": "#a6e3a1",
+    "bold": true,
+    "marginTop": 1,
+    "marginBottom": 1
+  },
+  "h3": {
+    "color": "#89b4fa",
+    "bold": true,
+    "marginTop": 1,
+    "marginBottom": 0
+  },
+  "paragraph": {
+    "color": "#bac2de",
+    "marginBottom": 1
+  },
+  "blockquote": {
+    "color": "#9399b2",
+    "borderColor": "#9399b2",
+    "paddingLeft": 2,
+    "marginTop": 1,
+    "marginBottom": 1
+  },
+  "list": {
+    "color": "#cdd6f4",
+    "marginTop": 1,
+    "marginBottom": 1,
+    "paddingLeft": 2
+  },
+  "listItem": {
+    "color": "#cdd6f4",
+    "paddingLeft": 0
+  },
+  "code": {
+    "color": "#f9e2af",
+    "background": "#313244",
+    "paddingLeft": 1,
+    "paddingRight": 1
+  },
+  "codeBlock": {
+    "color": "#f9e2af",
+    "background": "#313244",
+    "paddingLeft": 2,
+    "paddingRight": 2,
+    "marginTop": 1,
+    "marginBottom": 1
+  },
+  "emph": {
+    "color": "#94e2d5",
+    "italic": true
+  },
+  "strong": {
+    "color": "#fab387",
+    "bold": true
+  },
+  "link": {
+    "color": "#89b4fa",
+    "underline": true
+  }
+}
