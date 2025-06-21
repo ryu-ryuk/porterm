@@ -7,8 +7,8 @@ import (
 	"time"
 	"strings"
 	"math"
-	"terminal-portfolio/styles"
-	"terminal-portfolio/views"
+	"porterm/styles"
+	"porterm/views"
 )
 
 type Model struct {
@@ -22,7 +22,10 @@ type Model struct {
 	height        int
 	animationFrame int
 	bannerColors  []lipgloss.Color
+    aboutFunFactIndex int
+    aboutLastUpdate   time.Time
 }
+const funFactInterval = 3 * time.Second
 
 const (
 	defaultResumeWidth = 80
@@ -66,9 +69,15 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tickMsg:
 		m.animationFrame++
+		if m.view == "about" && time.Since(m.aboutLastUpdate) > funFactInterval {
+			m.aboutFunFactIndex = (m.aboutFunFactIndex + 1)
+			m.aboutLastUpdate = time.Now()
+		}
+
 		return m, tea.Tick(time.Millisecond*200, func(t time.Time) tea.Msg {
 			return tickMsg{}
 		})
+
 
 	case tea.WindowSizeMsg:
 		m.width = msg.Width
@@ -266,7 +275,7 @@ func (m Model) View() string {
 
 	switch m.view {
 	case "about":
-		content := views.About()
+		content := views.About(m.aboutFunFactIndex)
 		return centerStyle.Render(styles.AppStyle.Render(content))
 
 	case "projects":
