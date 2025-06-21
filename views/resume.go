@@ -1,27 +1,18 @@
 package views
 
 import (
-	"os"
 	"strings"
 
 	"github.com/charmbracelet/glamour"
 	"github.com/charmbracelet/lipgloss"
-
 	"porterm/styles"
+	"porterm/internal/data"
 )
 
 var rawResumeBodyContent string
 var resumeContactInfo string
-
 func init() {
-	data, err := os.ReadFile("content/resume.md")
-	if err != nil {
-		rawResumeBodyContent = styles.ErrorStyle.Render("Failed to load resume content: " + err.Error())
-		resumeContactInfo = ""
-		return
-	}
-
-	lines := strings.Split(string(data), "\n")
+	lines := strings.Split(data.ResumeData, "\n")
 	if len(lines) < 2 {
 		rawResumeBodyContent = styles.ErrorStyle.Render("Resume content too short or malformed.")
 		resumeContactInfo = ""
@@ -47,16 +38,10 @@ func GetResumeContactInfo() string {
 
 // prepares the styled resume content for the viewport using glamour.
 func ResumeContentForViewport(width int) string {
-	styleJSON, err := os.ReadFile("assets/glamour-catppuccin.json")
-	if err != nil {
-		return styles.ErrorStyle.Render("Failed to load styles: " + err.Error())
-	}
-
 	renderer, err := glamour.NewTermRenderer(
-		glamour.WithStylesFromJSONBytes(styleJSON),
+		glamour.WithStylesFromJSONBytes(data.GlamourStyle),
 		glamour.WithWordWrap(width),
 	)
-
 	if err != nil {
 		return styles.ErrorStyle.Render("Renderer error: " + err.Error())
 	}
@@ -68,7 +53,6 @@ func ResumeContentForViewport(width int) string {
 
 	return strings.TrimSpace(rendered)
 }
-
 
 func Resume() string {
 	if rawResumeBodyContent == "" {
