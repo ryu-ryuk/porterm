@@ -54,7 +54,7 @@ curl -sL https://scripts.alokranjan.me/porterm.sh | bash
 
 ## Overview
 
-**porterm** is a modern, Catppuccin-themed terminal portfolio and resume viewer.  
+**porterm** (PORTfolio + TERMinal) is a modern, Catppuccin-themed terminal portfolio and resume viewer.  
 It features animated banners, a dynamic About section, clickable project links, markdown resume rendering, and a clean, centered UI—built for developers who care about style and clarity in the terminal.
 
 ---
