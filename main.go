@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 	tea "github.com/charmbracelet/bubbletea"
-	"terminal-portfolio/model"
+	"porterm/model"
 )
 
 func main() {
