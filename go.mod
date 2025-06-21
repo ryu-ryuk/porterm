@@ -1,4 +1,4 @@
-module terminal-portfolio
+module porterm
 
 go 1.24.4
 
