@@ -18,7 +18,7 @@ import (
 
 const (
 	host = "0.0.0.0" // listen on all interfaces
-	port = 2022
+	port = 22
 	// path to your ssh host key. generate this file:\
 	// doc:
 	// ssh-keygen -t rsa -b 4096 -f .ssh/term_host_rsa -N ""
