@@ -15,7 +15,7 @@ import (
 
 func main() {
 	s, err := wish.NewServer(
-		wish.WithAddress(":2222"),
+		wish.WithAddress(":22"),
 		wish.WithMiddleware(
 			recover.Middleware(), // catch panics
 			logging.Middleware(), // log connections
