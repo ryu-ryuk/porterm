@@ -6,9 +6,11 @@ import (
 	"log"
 	"os"
 	"os/signal"
-	"porterm/model"
+	"strings"
 	"syscall"
 	"time"
+
+	"porterm/model"
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/ssh"
@@ -27,9 +29,7 @@ func main() {
 	s, err := wish.NewServer(
 		wish.WithAddress(fmt.Sprintf("%s:%d", host, port)),
 		wish.WithHostKeyPath(hostKeyPath),
-		wish.WithMiddleware(
-			handleSSHConnection(),
-		),
+		wish.WithMiddleware(handleSSHConnection()),
 	)
 	if err != nil {
 		log.Fatalf("could not start ssh server: %v", err)
@@ -37,6 +37,7 @@ func main() {
 
 	done := make(chan os.Signal, 1)
 	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
+
 	log.Printf("starting porterm ssh server on %s:%d", host, port)
 	go func() {
 		if err = s.ListenAndServe(); err != nil && err != ssh.ErrServerClosed {
@@ -53,13 +54,17 @@ func main() {
 	}
 	log.Println("porterm ssh server stopped.")
 }
+
 func handleSSHConnection() wish.Middleware {
 	return func(next ssh.Handler) ssh.Handler {
 		return func(s ssh.Session) {
-			// set TERM to xterm-256color for proper color support
-			os.Setenv("TERM", "xterm-256color")
+			// forward all session environment vars (including TERM)
+			for _, e := range s.Environ() {
+				if parts := strings.SplitN(e, "=", 2); len(parts) == 2 {
+					os.Setenv(parts[0], parts[1])
+				}
+			}
 
-			// create a new bubble tea program for each ssh session
 			p := tea.NewProgram(
 				model.New(),
 				tea.WithInput(s),
@@ -68,11 +73,9 @@ func handleSSHConnection() wish.Middleware {
 				tea.WithMouseCellMotion(),
 			)
 
-			// run the bubble tea program. the program will exit when 'q' or 'ctrl+c' is pressed.
 			if _, err := p.Run(); err != nil {
-				log.Printf("bubble tea program exited with error for session %s: %v", s.RemoteAddr(), err)
+				log.Printf("bubble tea error for session %s: %v", s.RemoteAddr(), err)
 			}
-
 			next(s)
 		}
 	}
