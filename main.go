@@ -1,3 +1,20 @@
+// package main
+
+// import (
+// 	tea "github.com/charmbracelet/bubbletea"
+// 	"porterm/model"
+// 	"os"
+// )
+
+//	func main() {
+//		p := tea.NewProgram(model.New())
+//		if _, err := p.Run(); err != nil {
+//			println("Error running program:", err)
+//			os.Exit(1)
+//		}
+//	}
+//
+// -------------------------------------------
 package main
 
 import (
@@ -58,10 +75,14 @@ func main() {
 func handleSSHConnection() wish.Middleware {
 	return func(next ssh.Handler) ssh.Handler {
 		return func(s ssh.Session) {
-			// forward all session environment vars (including TERM)
-			for _, e := range s.Environ() {
-				if parts := strings.SplitN(e, "=", 2); len(parts) == 2 {
-					os.Setenv(parts[0], parts[1])
+			// manually set TERM
+			_ = os.Setenv("TERM", "xterm-256color")
+
+			// apply all session env vars (important for TERM, LANG, etc)
+			for _, env := range s.Environ() {
+				parts := strings.SplitN(env, "=", 2)
+				if len(parts) == 2 {
+					_ = os.Setenv(parts[0], parts[1])
 				}
 			}
 
@@ -74,8 +95,9 @@ func handleSSHConnection() wish.Middleware {
 			)
 
 			if _, err := p.Run(); err != nil {
-				log.Printf("bubble tea error for session %s: %v", s.RemoteAddr(), err)
+				log.Printf("bubbletea error in session %s: %v", s.RemoteAddr(), err)
 			}
+
 			next(s)
 		}
 	}

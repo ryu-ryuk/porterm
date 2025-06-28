@@ -3,14 +3,16 @@ package views
 import (
 	"strings"
 
+	"porterm/internal/data"
+	"porterm/styles"
+
 	"github.com/charmbracelet/glamour"
 	"github.com/charmbracelet/lipgloss"
-	"porterm/styles"
-	"porterm/internal/data"
 )
 
 var rawResumeBodyContent string
 var resumeContactInfo string
+
 func init() {
 	lines := strings.Split(data.ResumeData, "\n")
 	if len(lines) < 2 {
@@ -54,7 +56,7 @@ func ResumeContentForViewport(width int) string {
 	return strings.TrimSpace(rendered)
 }
 
-func Resume() string {
+func Resume(width int) string {
 	if rawResumeBodyContent == "" {
 		return lipgloss.JoinVertical(lipgloss.Left,
 			styles.Heading.Render("Resume"),
@@ -68,7 +70,7 @@ func Resume() string {
 		styles.Heading.Render("Resume"),
 		styles.ContactInfo.Render(resumeContactInfo),
 		"",
-		styles.Content.Render("Use arrow keys to scroll."), // fallback message
+		ResumeContentForViewport(width),
 		"",
 		styles.Help.Render("Press esc to return to menu."),
 	)
