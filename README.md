@@ -45,7 +45,7 @@ curl -sL https://scripts.alokranjan.me/porterm.sh | bash
 ## SSH
 
 ```sh
-ssh porterm@alokranjan.me
+ssh porterm.alokranjan.me
 ```
 
 ---
