@@ -37,6 +37,14 @@
 
 ---
 
+## Preview
+
+<p align="center">
+  <img src="docs/preview.gif" alt="Preview of porterm" />
+</p>
+
+---
+
 ## Quick Install / One-time run
 
 ```sh
@@ -49,13 +57,6 @@ ssh porterm.alokranjan.me
 ```
 
 ---
-
-## Preview
-
-<p align="center">
-  <img src="docs/preview.gif" alt="Preview of porterm" />
-</p>
-
 
 ## Overview
 
