@@ -37,10 +37,15 @@
 
 ---
 
-## Quick Install
+## Quick Install / One-time run
 
 ```sh
 curl -sL https://scripts.alokranjan.me/porterm.sh | bash
+```
+## SSH
+
+```sh
+ssh porterm@alokranjan.me
 ```
 
 ---
